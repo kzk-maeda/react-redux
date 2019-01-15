@@ -3,9 +3,11 @@ $text-color: #444;
 
 body {
   background-color: $backgrount-color;
-  text-align: center;
   color: $text-color;
 }
 
+@import './Reset.scss';
+@import './App.scss';
+@import './SearchForm.scss';
 @import './GeocodeResult.scss';
 @import './Map.scss';
