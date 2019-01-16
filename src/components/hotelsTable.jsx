@@ -1,21 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import HotelRow from './HotelRow';
+
 const HotelsTable = ({ hotels }) => (
-  <ul className="geocode-result">
-    <li>住所：{address}</li>
-    <li>緯度：{location.lat}</li>
-    <li>経度：{location.lng}</li>
-  </ul>
+  <table>
+    <tbody>
+      <tr>
+        <th>画像</th>
+        <th>ホテル名</th>
+        <th className="hotel-price-column">値段</th>
+        <th>レビュー</th>
+        <th>レビュー件数</th>
+        <th>距離</th>
+      </tr>
+      {hotels.map(hotel => (<HotelRow key={hotel.id} hotel={hotel} />))}
+    </tbody>
+  </table>
 );
 
 HotelsTable.propTypes = {
-  address: PropTypes.string,
-  location: PropTypes.objectOf(PropTypes.number).isRequired,
+  hotels: PropTypes.arrayOf(PropTypes.any),
 };
 
 HotelsTable.defaultProps = {
-  address: '',
+  hotels: [],
 };
 
 export default HotelsTable;
