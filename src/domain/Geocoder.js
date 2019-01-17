@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const GEOCODE_ENDPOINT = 'https://maps.googleapis.com/maps/api/geocode/json';
-const API_KEY = 'AIzaSyDIABRpwirP8K8Dc6QE1rGhXyE0bprJyXk';
+const API_KEY = '';
 
 export const geocode = place =>
   axios
