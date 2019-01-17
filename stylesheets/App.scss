@@ -1,9 +1,20 @@
 .app {
   width: 1000px;
-  margin: 0 auto;
+  margin: 40px auto 0;
+  display: flex;
+}
+
+.left-navi {
+  width: 110px;
+  list-style-type: none;
+  margin-top: 20px;
+  margin-right: 40px;
+  padding-right: 40px;
+  border-right: 1px solid #ccc;
 }
 
 .app-title {
+  margin-top: 20;
   text-align: center;
 }
 
