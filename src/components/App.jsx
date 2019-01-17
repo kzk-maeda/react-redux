@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 import SearchForm from './SearchForm';
 import GeocodeResult from './GeocodeResult';
@@ -7,6 +8,10 @@ import HotelsTable from './HotelsTable';
 import { geocode } from '../domain/Geocoder';
 import { searchHotelByLocation } from '../domain/HotelRepository';
 
+const sortedHotels = (hotels, sortKey) => {
+  console.log(hotels, sortKey);
+  return _.sortBy(hotels, h => h[sortKey]);
+};
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +25,7 @@ class App extends Component {
         { id: 111, name: 'ホテルオークラ', url: 'https://google.com' },
         { id: 222, name: 'アパホテル', url: 'https://yahoo.co.jp' },
       ],
+      sortKey: 'price',
     };
   }
 
@@ -53,11 +59,18 @@ class App extends Component {
         return [];
       })
       .then((hotels) => {
-        this.setState({ hotels });
+        this.setState({ hotels: sortedHotels(hotels, this.state.sortKey) });
       })
       .catch(() => {
         this.setErrorMessage('通信に失敗しました');
       });
+  }
+
+  handleSortKeyChange(sortKey) {
+    this.setState({
+      sortKey,
+      hotels: sortedHotels(this.state.hotels, sortKey),
+    });
   }
 
   render() {
@@ -73,7 +86,11 @@ class App extends Component {
               location={this.state.location}
             />
             <h2>ホテル検索結果</h2>
-            <HotelsTable hotels={this.state.hotels} />
+            <HotelsTable
+              hotels={this.state.hotels}
+              sortKey={this.state.sortKey}
+              onSort={sortKey => this.handleSortKeyChange(sortKey)}
+            />
           </div>
         </div>
       </div>
